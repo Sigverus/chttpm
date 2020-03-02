@@ -8,6 +8,10 @@ class asIScriptEngine;
 
 namespace chttpm
 {
+	struct Request;
+
+
+
 	class ScriptingService final
 	{
 	public:
@@ -23,11 +27,12 @@ namespace chttpm
 		// TODO : overload with multiple files
 		void LoadModule(const char* moduleName, const char *scriptFile);
 
-		void ExecuteModule(const char *moduleName);
+		void ProcessRequest(const char *moduleName, const Request& request) const;
 
 
 
-	private:
+		// private:
+	public: // TODO : temporarily public until which pattern to register objects without exposing this is decided
 		asIScriptEngine* scriptEngine = nullptr;
 	};
 }

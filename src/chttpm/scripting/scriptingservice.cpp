@@ -7,6 +7,9 @@
 #include<scriptbuilder/scriptbuilder.h>
 #include<scriptstdstring/scriptstdstring.h>
 
+#include"bindrequest.h"
+#include"../request.h"
+
 
 
 namespace chttpm
@@ -33,6 +36,7 @@ namespace chttpm
 	ScriptingService::ScriptingService()
 	{
 		scriptEngine = asCreateScriptEngine();
+		scriptEngine->SetEngineProperty(asEP_PROPERTY_ACCESSOR_MODE, 3);
 		RegisterStdString(scriptEngine);
 
 		int r;
@@ -78,20 +82,23 @@ namespace chttpm
 
 
 
-	void ScriptingService::ExecuteModule(const char *moduleName)
+	void ScriptingService::ProcessRequest(const char *moduleName, const Request& request) const
 	{
 		auto *scriptModule = scriptEngine->GetModule(moduleName);
-		auto *scriptEntryPoint = scriptModule->GetFunctionByDecl("void main()");
+		auto *scriptEntryPoint = scriptModule->GetFunctionByDecl("void ProcessRequest(const Request&)");
 		if (scriptEntryPoint == nullptr)
 		{
-			std::cout << "Entry point function 'void main()' was not found." << std::endl;
+			std::cout << "Entry point function 'void ProcessRequest(const Request&)' was not found." << std::endl;
 			// TODO : throw an exception here?
 			return;
 		}
 
-		// TODO : guarantee no memory leak here
+
 		auto *scriptExecutionContext = scriptEngine->CreateContext();
 		scriptExecutionContext->Prepare(scriptEntryPoint);
+
+		BindRequest scriptedRequest{ request };
+		scriptExecutionContext->SetArgObject(0, &scriptedRequest);
 
 		int r = scriptExecutionContext->Execute();
 		if (r != asEXECUTION_FINISHED)
