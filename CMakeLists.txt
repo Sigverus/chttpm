@@ -5,6 +5,10 @@ set(CPP_HTTPLIB
 	src/cpp-httplib/httplib.h
 )
 
+set(ARGS
+	src/args/args.hxx
+)
+
 set(ANGELSCRIPT
 	src/angelscript/include/angelscript.h 
 
@@ -161,6 +165,7 @@ find_package(Threads)
 
 add_executable(chttpm
 	${CPP_HTTPLIB}
+	${ARGS}
 	${ANGELSCRIPT}
 	${CHTTPM_SOURCE}
 )
@@ -206,6 +211,7 @@ set_target_properties(chttpm
 
 target_include_directories(
 	chttpm PUBLIC
-	src/cpp-httplib
 	src/angelscript/include
+	src/args
+	src/cpp-httplib
 )

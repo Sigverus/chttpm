@@ -23,12 +23,26 @@ This project has the following dependencies:
 
 - `Cpp HTTPLib`: simple header only HTTP Library to act as the HTTP Server.
 - `Angel Script`: scripting language to allow to change the HTTP Server behavior without recompiling the source.
+- `Args`: header only library to handle the command lines arguments.
 
 The dependencies are included in the source code and compiled together with CHTTPM. See their respective folders for information about their licenses.
 
 # How to use
 
-You don't. The project is still in a too early of an state to be useful
+You don't. The project is still in a too early of an state to be useful. Anyway...
+
+Run `chttpm`. It will attempt to load a `main.as` Angel Script file for execution. As of now, there is no hot-reloading of the script file. Use `--help` to see all configuration.
+
+## Exposed Types
+
+The exposed types are very limited as I am learning how to bind data with the Angel Script engine.
+
+The currently exposed types are as defined by their source files:
+
+- [Request](./src/chttpm/request.h)
+- [Response](./src/chttpm/response.h)
+
+There is a `void print(std::string)` function exported, but it will eventually be substituted by a logging entity.
 
 # Compiling
 
