@@ -3,6 +3,8 @@
 #include<httplib.h>
 #include<args.hxx>
 
+#include"configuration.h"
+
 #include"request.h"
 #include"response.h"
 
@@ -14,66 +16,9 @@
 
 int main(int argc, char* argv[])
 {
-	args::ArgumentParser argumentParser{
-		"C++ HTTP Mock utility",
-		"If you need complex logic, seriously consider using a better solution than this"
-	};
-
-	args::HelpFlag argumentHelp{
-		argumentParser,
-		"help",
-		"Displays the help information",
-		{'h', "help"}
-	};
-
-	args::ValueFlag<std::string> scriptArgument{
-		argumentParser,
-		"file",
-		"Script to be used to handle all incoming requests. Defaults to 'main.as'",
-		{'s', "script"},
-		"main.as"
-	};
-
-	args::ValueFlag<std::string> listeningAddressArgument{
-		argumentParser,
-		"address",
-		"Address to listen. Defaults to '0.0.0.0' (any)",
-		{'a', "address"},
-		"0.0.0.0"
-	};
-
-	args::ValueFlag<std::int16_t> listeningPortArgument{
-		argumentParser,
-		"port number",
-		"Port to listen. Default to '8080'.",
-		{'p', "port"},
-		8080
-	};
-
-	args::CompletionFlag argumentCompletion{ argumentParser, {"complete"} };
-
-
-	try
-	{
-		argumentParser.ParseCLI(argc, argv);
-	}
-	catch (const args::Completion& e)
-	{
-		std::cout << e.what();
-		return 0;
-	}
-	catch (const args::Help&)
-	{
-		std::cout << argumentParser;
-		return 0;
-	}
-	catch (const args::ParseError& e)
-	{
-		std::cerr << e.what() << std::endl;
-		std::cerr << argumentParser;
-		return 1;
-	}
-
+	auto[config, success, code] = chttpm::LoadConfigurationFromCommandLine(argc, argv);
+	if (!success)
+		return code;
 
 
 	const auto scriptModule = "MainModule";
@@ -81,7 +26,7 @@ int main(int argc, char* argv[])
 	chttpm::BindRequest::RegisterIntoScriptingService(scriptingService);
 	chttpm::BindResponse::RegisterIntoScriptingService(scriptingService);
 
-	scriptingService.LoadModule(scriptModule, scriptArgument.Get().c_str());
+	scriptingService.LoadModule(scriptModule, config.scriptFile.c_str());
 
 	httplib::Server server{};
 
@@ -109,10 +54,7 @@ int main(int argc, char* argv[])
 	server.Put(R"((.*))", handlerFunc);
 
 	std::cout << "Starting Server" << std::endl;
-	server.listen(
-		listeningAddressArgument.Get().c_str(),
-		listeningPortArgument.Get()
-	);
+	server.listen(config.ipAddress.c_str(), config.port);
 	std::cout << "Exiting" << std::endl;
 
 	return 0;

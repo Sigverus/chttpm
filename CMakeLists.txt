@@ -103,6 +103,9 @@ set(ANGELSCRIPT
 set(CHTTPM_SOURCE
 	src/chttpm/main.cpp
 
+	src/chttpm/configuration.cpp
+	src/chttpm/configuration.h
+
 	src/chttpm/request.cpp
 	src/chttpm/request.h
 	src/chttpm/response.cpp
