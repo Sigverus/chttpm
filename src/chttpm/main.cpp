@@ -3,9 +3,11 @@
 #include<httplib.h>
 
 #include"request.h"
+#include"response.h"
 
 #include"scripting/scriptingservice.h"
 #include"scripting/bindrequest.h"
+#include"scripting/bindresponse.h"
 
 
 
@@ -13,24 +15,26 @@ int main(int argc, char* argv[])
 {
 	chttpm::ScriptingService scriptingService{};
 	chttpm::BindRequest::RegisterIntoScriptingService(scriptingService);
+	chttpm::BindResponse::RegisterIntoScriptingService(scriptingService);
+
 	scriptingService.LoadModule("MyModule", "test.as");
 
 	httplib::Server server{};
 
 	auto handlerFunc = [&](const httplib::Request& request, httplib::Response& response)
 	{
-		auto url = request.matches[1];
-		char buffer[512]; // Not really safe. Will be removed soon, when we removing the hello world.
-		sprintf(buffer, "%s %s\nHello World!\n", request.method.c_str(), request.target.c_str());
-		response.set_content(buffer, "text/plain");
-
 		// TODO : better way to build the request
 		chttpm::Request chttpmRequest{};
 		chttpmRequest.method = request.method;
 		chttpmRequest.target = request.target;
 
+		chttpm::Response chttpmResponse{};
 
-		scriptingService.ProcessRequest("MyModule", chttpmRequest);
+		scriptingService.ProcessRequest("MyModule", chttpmRequest, chttpmResponse);
+
+		// TODO : better way to set from the response
+		response.body = chttpmResponse.body;
+		response.set_header("Content-Type", "text/plain");
 	};
 
 	server.Delete(R"((.*))", handlerFunc);

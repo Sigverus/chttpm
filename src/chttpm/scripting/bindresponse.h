@@ -8,19 +8,20 @@ class asILockableSharedBool;
 
 namespace chttpm
 {
-	struct Request;
+	struct Response;
 	class ScriptingService;
 
-	// Binds a chttpm::Request to the Angel Script engine, with needed extra
+
+	// Binds a chttpm::Response to the Angel Script engine, with needed extra
 	// behaviors.
-	class BindRequest final
+	class BindResponse final
 	{
 	public:
-		explicit BindRequest(const Request& request);
-		~BindRequest();
+		explicit BindResponse(Response& response);
+		~BindResponse();
 
-		std::string GetMethod() const;
-		std::string GetTarget() const;
+		std::string GetBody() const;
+		void SetBody(std::string& body);
 
 		// Angel Script
 		int AddRef();
@@ -32,11 +33,10 @@ namespace chttpm
 
 
 	private:
-		const Request& m_Request;
+		Response& m_Response;
 
 		// Angel Script
 		int m_ReferencesCount = 1;
 		asILockableSharedBool *m_WeakReferenceFlag = nullptr;
 	};
 }
-

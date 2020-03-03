@@ -10,6 +10,9 @@
 #include"bindrequest.h"
 #include"../request.h"
 
+#include"bindresponse.h"
+#include"../response.h"
+
 
 
 namespace chttpm
@@ -82,13 +85,13 @@ namespace chttpm
 
 
 
-	void ScriptingService::ProcessRequest(const char *moduleName, const Request& request) const
+	void ScriptingService::ProcessRequest(const char *moduleName, const Request& request, Response& response) const
 	{
 		auto *scriptModule = scriptEngine->GetModule(moduleName);
-		auto *scriptEntryPoint = scriptModule->GetFunctionByDecl("void ProcessRequest(const Request&)");
+		auto *scriptEntryPoint = scriptModule->GetFunctionByDecl("void ProcessRequest(const Request&, Response&)");
 		if (scriptEntryPoint == nullptr)
 		{
-			std::cout << "Entry point function 'void ProcessRequest(const Request&)' was not found." << std::endl;
+			std::cout << "Entry point function 'void ProcessRequest(const Request&, Response&)' was not found." << std::endl;
 			// TODO : throw an exception here?
 			return;
 		}
@@ -98,7 +101,9 @@ namespace chttpm
 		scriptExecutionContext->Prepare(scriptEntryPoint);
 
 		BindRequest scriptedRequest{ request };
+		BindResponse scriptedResponse{ response };
 		scriptExecutionContext->SetArgObject(0, &scriptedRequest);
+		scriptExecutionContext->SetArgObject(1, &scriptedResponse);
 
 		int r = scriptExecutionContext->Execute();
 		if (r != asEXECUTION_FINISHED)

@@ -101,9 +101,13 @@ set(CHTTPM_SOURCE
 
 	src/chttpm/request.cpp
 	src/chttpm/request.h
+	src/chttpm/response.cpp
+	src/chttpm/response.h
 
 	src/chttpm/scripting/bindrequest.cpp
 	src/chttpm/scripting/bindrequest.h
+	src/chttpm/scripting/bindresponse.cpp
+	src/chttpm/scripting/bindresponse.h
 	src/chttpm/scripting/scriptingservice.cpp
 	src/chttpm/scripting/scriptingservice.h
 )

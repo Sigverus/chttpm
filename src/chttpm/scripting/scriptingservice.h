@@ -9,6 +9,7 @@ class asIScriptEngine;
 namespace chttpm
 {
 	struct Request;
+	struct Response;
 
 
 
@@ -27,7 +28,7 @@ namespace chttpm
 		// TODO : overload with multiple files
 		void LoadModule(const char* moduleName, const char *scriptFile);
 
-		void ProcessRequest(const char *moduleName, const Request& request) const;
+		void ProcessRequest(const char *moduleName, const Request& request, Response& response) const;
 
 
 
