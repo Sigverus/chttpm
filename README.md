@@ -33,12 +33,31 @@ You don't. The project is still in a too early of an state to be useful. Anyway.
 
 Run `chttpm`. It will attempt to load a `main.as` Angel Script file for execution. As of now, there is no hot-reloading of the script file. Use `--help` to see all configuration.
 
+## Script example
+
+```c++
+void ProcessRequest(const Request& request, Response& response)
+{
+	print("LOG: received [" + request.method + "] request on target [" + request.target + "]");
+
+	response.statusCode = HttpStatusCode::Ok;
+	
+	response.body = "{\n";
+	response.body += "    \"method\": \"" + request.method + "\",\n";
+	response.body += "    \"target\": \"" + request.target + "\"\n";
+	response.body += "}\n";
+}
+```
+
+Examples can be found in the `examples` directory.
+
 ## Exposed Types
 
 The exposed types are very limited as I am learning how to bind data with the Angel Script engine.
 
 The currently exposed types are as defined by their source files:
 
+- [HttpStatusCode](./src/chttpm/httpstatuscode.h)
 - [Request](./src/chttpm/request.h)
 - [Response](./src/chttpm/response.h)
 

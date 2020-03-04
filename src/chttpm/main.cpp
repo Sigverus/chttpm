@@ -9,6 +9,7 @@
 #include"response.h"
 
 #include"scripting/scriptingservice.h"
+#include"scripting/bindhttpstatuscode.h"
 #include"scripting/bindrequest.h"
 #include"scripting/bindresponse.h"
 
@@ -23,6 +24,7 @@ int main(int argc, char* argv[])
 
 	const auto scriptModule = "MainModule";
 	chttpm::ScriptingService scriptingService{};
+	chttpm::BindHttpStatusCode::RegisterIntoScriptingService(scriptingService);
 	chttpm::BindRequest::RegisterIntoScriptingService(scriptingService);
 	chttpm::BindResponse::RegisterIntoScriptingService(scriptingService);
 
@@ -42,6 +44,7 @@ int main(int argc, char* argv[])
 		scriptingService.ProcessRequest(scriptModule, chttpmRequest, chttpmResponse);
 
 		// TODO : better way to set from the response
+		response.status = chttpmResponse.statusCode;
 		response.body = chttpmResponse.body;
 		response.set_header("Content-Type", "text/plain");
 	};

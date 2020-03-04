@@ -106,11 +106,14 @@ set(CHTTPM_SOURCE
 	src/chttpm/configuration.cpp
 	src/chttpm/configuration.h
 
+	src/chttpm/httpstatuscode.h
 	src/chttpm/request.cpp
 	src/chttpm/request.h
 	src/chttpm/response.cpp
 	src/chttpm/response.h
 
+	src/chttpm/scripting/bindhttpstatuscode.cpp
+	src/chttpm/scripting/bindhttpstatuscode.h
 	src/chttpm/scripting/bindrequest.cpp
 	src/chttpm/scripting/bindrequest.h
 	src/chttpm/scripting/bindresponse.cpp

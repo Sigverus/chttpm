@@ -28,6 +28,20 @@ namespace chttpm
 
 
 
+	int BindResponse::GetStatusCode() const
+	{
+		return m_Response.statusCode;
+	}
+
+
+
+	void BindResponse::SetStatusCode(int statusCode)
+	{
+		m_Response.statusCode = statusCode;
+	}
+
+
+
 	std::string BindResponse::GetBody() const
 	{
 		return m_Response.body;
@@ -79,7 +93,11 @@ namespace chttpm
 		r = scriptingService.scriptEngine->RegisterObjectBehaviour("Response", asBEHAVE_RELEASE, "void f()", asMETHOD(BindResponse, Release), asCALL_THISCALL); assert(r >= 0);
 		r = scriptingService.scriptEngine->RegisterObjectBehaviour("Response", asBEHAVE_GET_WEAKREF_FLAG, "int &f()", asMETHOD(BindResponse, GetWeakRefFlag), asCALL_THISCALL); assert(r >= 0);
 
+
 		// Properties
+		r = scriptingService.scriptEngine->RegisterObjectMethod("Response", "int get_statusCode() const property", asMETHOD(BindResponse, GetStatusCode), asCALL_THISCALL); assert(r >= 0);
+		r = scriptingService.scriptEngine->RegisterObjectMethod("Response", "void set_statusCode(int) property", asMETHOD(BindResponse, SetStatusCode), asCALL_THISCALL); assert(r >= 0);
+
 		r = scriptingService.scriptEngine->RegisterObjectMethod("Response", "string get_body() const property", asMETHOD(BindResponse, GetBody), asCALL_THISCALL); assert(r >= 0);
 		r = scriptingService.scriptEngine->RegisterObjectMethod("Response", "void set_body(string) property", asMETHOD(BindResponse, SetBody), asCALL_THISCALL); assert(r >= 0);
 	}

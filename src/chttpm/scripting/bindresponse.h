@@ -20,6 +20,9 @@ namespace chttpm
 		explicit BindResponse(Response& response);
 		~BindResponse();
 
+		int GetStatusCode() const;
+		void SetStatusCode(int statusCode);
+
 		std::string GetBody() const;
 		void SetBody(std::string& body);
 
