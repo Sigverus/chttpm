@@ -101,7 +101,6 @@ set(ANGELSCRIPT
 )
 
 set(CHTTPM_SOURCE
-	src/chttpm/main.cpp
 
 	src/chttpm/configuration.cpp
 	src/chttpm/configuration.h
@@ -112,6 +111,9 @@ set(CHTTPM_SOURCE
 	src/chttpm/response.cpp
 	src/chttpm/response.h
 
+	src/chttpm/log/log.cpp
+	src/chttpm/log/log.h
+
 	src/chttpm/scripting/bindhttpstatuscode.cpp
 	src/chttpm/scripting/bindhttpstatuscode.h
 	src/chttpm/scripting/bindrequest.cpp
@@ -120,6 +122,15 @@ set(CHTTPM_SOURCE
 	src/chttpm/scripting/bindresponse.h
 	src/chttpm/scripting/scriptingservice.cpp
 	src/chttpm/scripting/scriptingservice.h
+)
+
+set(CHTTPMTESTS_SOURCE
+	src/chttpmtests/main.cpp
+
+	src/chttpmtests/assertions.cpp
+	src/chttpmtests/assertions.h
+
+	src/chttpmtests/log/logtests.cpp
 )
 
 
@@ -170,10 +181,20 @@ endif()
 find_package(Threads)
 
 add_executable(chttpm
+	src/chttpm/main.cpp
+
 	${CPP_HTTPLIB}
 	${ARGS}
 	${ANGELSCRIPT}
 	${CHTTPM_SOURCE}
+)
+
+add_executable(chttpmtests
+	${CPP_HTTPLIB}
+	${ARGS}
+	${ANGELSCRIPT}
+	${CHTTPM_SOURCE}
+	${CHTTPMTESTS_SOURCE}
 )
 
 #############################################################
@@ -206,7 +227,20 @@ target_link_libraries(chttpm
 	Threads::Threads
 )
 
+target_link_libraries(chttpmtests
+	Threads::Threads
+)
+
 set_target_properties(chttpm
+	PROPERTIES
+	CXX_STANDARD 17
+	CXX_STANDARD_REQUIRE ON
+	ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+	LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+	RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+set_target_properties(chttpmtests
 	PROPERTIES
 	CXX_STANDARD 17
 	CXX_STANDARD_REQUIRE ON
@@ -217,6 +251,14 @@ set_target_properties(chttpm
 
 target_include_directories(
 	chttpm PUBLIC
+	src/angelscript/include
+	src/args
+	src/cpp-httplib
+)
+
+target_include_directories(
+	chttpmtests PUBLIC
+	src/chttpm
 	src/angelscript/include
 	src/args
 	src/cpp-httplib
