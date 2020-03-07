@@ -2,9 +2,9 @@
 
 #include<string>
 
+#include"helper/bindreference.h"
 
 
-class asILockableSharedBool;
 
 namespace chttpm
 {
@@ -14,7 +14,7 @@ namespace chttpm
 
 	// Binds a chttpm::Response to the Angel Script engine, with needed extra
 	// behaviors.
-	class BindResponse final
+	class BindResponse final : public BindReference<BindResponse>
 	{
 	public:
 		explicit BindResponse(Response& response);
@@ -26,20 +26,11 @@ namespace chttpm
 		std::string GetBody() const;
 		void SetBody(std::string& body);
 
-		// Angel Script
-		int AddRef();
-		int Release();
-		asILockableSharedBool *GetWeakRefFlag();
-
 		static void RegisterIntoScriptingService(ScriptingService& scriptingService);
 
 
 
 	private:
 		Response& m_Response;
-
-		// Angel Script
-		int m_ReferencesCount = 1;
-		asILockableSharedBool *m_WeakReferenceFlag = nullptr;
 	};
 }

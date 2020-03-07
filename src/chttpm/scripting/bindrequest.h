@@ -2,18 +2,19 @@
 
 #include<string>
 
+#include"helper/bindreference.h"
 
 
-class asILockableSharedBool;
 
 namespace chttpm
 {
 	struct Request;
 	class ScriptingService;
 
+
 	// Binds a chttpm::Request to the Angel Script engine, with needed extra
 	// behaviors.
-	class BindRequest final
+	class BindRequest final : public BindReference<BindRequest>
 	{
 	public:
 		explicit BindRequest(const Request& request);
@@ -22,21 +23,12 @@ namespace chttpm
 		std::string GetMethod() const;
 		std::string GetTarget() const;
 
-		// Angel Script
-		int AddRef();
-		int Release();
-		asILockableSharedBool *GetWeakRefFlag();
-
 		static void RegisterIntoScriptingService(ScriptingService& scriptingService);
 
 
 
 	private:
 		const Request& m_Request;
-
-		// Angel Script
-		int m_ReferencesCount = 1;
-		asILockableSharedBool *m_WeakReferenceFlag = nullptr;
 	};
 }
 
