@@ -124,6 +124,9 @@ set(CHTTPM_SOURCE
 	src/chttpm/scripting/scriptingservice.h
 
 	src/chttpm/scripting/helper/bindreference.h
+
+	src/chttpm/scripting/log/bindlog.cpp
+	src/chttpm/scripting/log/bindlog.h
 )
 
 set(CHTTPMTESTS_SOURCE

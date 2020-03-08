@@ -12,6 +12,7 @@
 #include"scripting/bindhttpstatuscode.h"
 #include"scripting/bindrequest.h"
 #include"scripting/bindresponse.h"
+#include"scripting/log/bindlog.h"
 
 
 
@@ -27,6 +28,9 @@ int main(int argc, char* argv[])
 	chttpm::BindHttpStatusCode::RegisterIntoScriptingService(scriptingService);
 	chttpm::BindRequest::RegisterIntoScriptingService(scriptingService);
 	chttpm::BindResponse::RegisterIntoScriptingService(scriptingService);
+	chttpm::BindMessageLoggerKeys::RegisterIntoScriptingService(scriptingService);
+	chttpm::BindBuilderLoggerKeys::RegisterIntoScriptingService(scriptingService);
+	chttpm::BindLogger::RegisterIntoScriptingService(scriptingService);
 
 	scriptingService.LoadModule(scriptModule, config.scriptFile.c_str());
 

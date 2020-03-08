@@ -15,14 +15,12 @@ namespace chttpm
 	BindRequest::BindRequest(const Request& request) :
 		m_Request(request)
 	{
-		std::cout << "BindRequest::BindRequest(const Request&)" << std::endl;
 	}
 
 
 
 	BindRequest::~BindRequest()
 	{
-		std::cout << "BindRequest::~BindRequest()" << std::endl;
 	}
 
 
