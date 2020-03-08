@@ -1,6 +1,5 @@
 #pragma once
 
-#include<iostream>
 #include<cassert>
 
 #include<angelscript.h>
@@ -19,7 +18,7 @@ namespace chttpm
 		{
 		}
 
-		~BindReference()
+		virtual ~BindReference()
 		{
 			if (m_WeakReferenceFlag)
 			{
