@@ -27,6 +27,7 @@ namespace chttpm
 
 		// TODO : overload with multiple files
 		void LoadModule(const char* moduleName, const char *scriptFile);
+		void LoadModuleFromMemory(const char* moduleName, const char* moduleCode);
 
 		void ProcessRequest(const char *moduleName, const Request& request, Response& response) const;
 

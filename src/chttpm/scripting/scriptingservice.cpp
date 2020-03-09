@@ -85,6 +85,33 @@ namespace chttpm
 
 
 
+	void ScriptingService::LoadModuleFromMemory(const char* moduleName, const char* moduleCode)
+	{
+		CScriptBuilder scriptBuilder{};
+		int r = scriptBuilder.StartNewModule(scriptEngine, moduleName);
+		if (r < 0)
+		{
+			std::cout << "Failed to start new module " << moduleName << std::endl;
+			return;
+		}
+
+		r = scriptBuilder.AddSectionFromMemory("moduleName", moduleCode);
+		if (r < 0)
+		{
+			std::cout << "Failed to load script file." << std::endl;
+			return;
+		}
+
+		r = scriptBuilder.BuildModule();
+		if (r < 0)
+		{
+			std::cout << "Found errors in the script file." << std::endl;
+			return;
+		}
+	}
+
+
+
 	void ScriptingService::ProcessRequest(const char *moduleName, const Request& request, Response& response) const
 	{
 		auto *scriptModule = scriptEngine->GetModule(moduleName);
