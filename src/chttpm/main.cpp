@@ -9,10 +9,7 @@
 #include"response.h"
 
 #include"scripting/scriptingservice.h"
-#include"scripting/bindhttpstatuscode.h"
-#include"scripting/bindrequest.h"
-#include"scripting/bindresponse.h"
-#include"scripting/log/bindlog.h"
+#include"scripting/startupbinder.h"
 
 
 
@@ -25,12 +22,7 @@ int main(int argc, char* argv[])
 
 	const auto scriptModule = "MainModule";
 	chttpm::ScriptingService scriptingService{};
-	chttpm::BindHttpStatusCode::RegisterIntoScriptingService(scriptingService);
-	chttpm::BindRequest::RegisterIntoScriptingService(scriptingService);
-	chttpm::BindResponse::RegisterIntoScriptingService(scriptingService);
-	chttpm::BindMessageLoggerKeys::RegisterIntoScriptingService(scriptingService);
-	chttpm::BindBuilderLoggerKeys::RegisterIntoScriptingService(scriptingService);
-	chttpm::BindLogger::RegisterIntoScriptingService(scriptingService);
+	chttpm::StartupBinder::BindAll(scriptingService);
 
 	scriptingService.LoadModule(scriptModule, config.scriptFile.c_str());
 
