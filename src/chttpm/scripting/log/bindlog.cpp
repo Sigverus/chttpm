@@ -114,6 +114,14 @@ namespace chttpm
 
 
 
+	BindLogger& BindLogger::OpAssign(const BindLogger& other)
+	{
+		this->m_Logger = other.m_Logger;
+		return *this;
+	}
+
+
+
 	BindLogger *BindLoggerFactory()
 	{
 		return new BindLogger{ Logger{} };
@@ -123,6 +131,9 @@ namespace chttpm
 
 	void BindLogger::RegisterIntoScriptingService(ScriptingService& scriptingService)
 	{
+		// Helpers
+		BindReference::RegisterIntoScriptingService("Logger", scriptingService);
+
 		int r;
 
 		// Register object.
@@ -135,7 +146,8 @@ namespace chttpm
 		r = scriptingService.scriptEngine->RegisterObjectMethod("Logger", "MessageLoggerKeys@ Info() const", asMETHOD(BindLogger, Info), asCALL_THISCALL); assert(r >= 0);
 		r = scriptingService.scriptEngine->RegisterObjectMethod("Logger", "BuilderLoggerKeys@ With() const", asMETHOD(BindLogger, With), asCALL_THISCALL); assert(r >= 0);
 
-		// Helpers
-		BindReference::RegisterIntoScriptingService("Logger", scriptingService);
+		// Operators
+		r = scriptingService.scriptEngine->RegisterObjectMethod("Logger", "Logger& opAssign(const Logger&)", asMETHOD(BindLogger, OpAssign), asCALL_THISCALL);
+
 	}
 }

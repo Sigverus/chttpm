@@ -67,6 +67,8 @@ namespace chttpm
 		BindMessageLoggerKeys* Info() const;
 		BindBuilderLoggerKeys* With() const;
 
+		BindLogger& OpAssign(const BindLogger& other);
+
 		static void RegisterIntoScriptingService(ScriptingService& scriptingService);
 
 
