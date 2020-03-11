@@ -141,6 +141,8 @@ set(CHTTPMTESTS_SOURCE
 
 	src/chttpmtests/scripting/bindrequesttests.cpp
 	src/chttpmtests/scripting/bindresponsetests.cpp
+
+	src/chttpmtests/scripting/log/bindlogtests.cpp
 )
 
 
