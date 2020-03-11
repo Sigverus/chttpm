@@ -2,6 +2,8 @@
 
 #include<string>
 
+#include"queryparameters.h"
+
 
 
 namespace chttpm
@@ -21,5 +23,8 @@ namespace chttpm
 
 		// The target used to access the server
 		std::string target;
+
+		// Stores the query parameters that can be found on @target.
+		QueryParameters queryParameters;
 	};
 }

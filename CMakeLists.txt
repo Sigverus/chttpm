@@ -106,6 +106,8 @@ set(CHTTPM_SOURCE
 	src/chttpm/configuration.h
 
 	src/chttpm/httpstatuscode.h
+	src/chttpm/queryparameters.cpp
+	src/chttpm/queryparameters.h
 	src/chttpm/request.cpp
 	src/chttpm/request.h
 	src/chttpm/response.cpp
@@ -136,6 +138,8 @@ set(CHTTPMTESTS_SOURCE
 
 	src/chttpmtests/assertions.cpp
 	src/chttpmtests/assertions.h
+
+	src/chttpmtests/queryparameterstests.cpp
 
 	src/chttpmtests/log/logtests.cpp
 

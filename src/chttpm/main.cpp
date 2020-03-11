@@ -34,6 +34,10 @@ int main(int argc, char* argv[])
 		chttpm::Request chttpmRequest{};
 		chttpmRequest.method = request.method;
 		chttpmRequest.target = request.target;
+		for (auto& queryParameterKV : request.params)
+		{
+			chttpmRequest.queryParameters.Add(queryParameterKV.first, queryParameterKV.second);
+		}
 
 		chttpm::Response chttpmResponse{};
 
