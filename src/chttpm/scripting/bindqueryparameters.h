@@ -17,7 +17,8 @@ namespace chttpm
 	public:
 		explicit BindQueryParameters(const QueryParameters& queryParameters);
 
-		static void RegisterIntoScriptingService(ScriptingService& scriptingService);
+		static void RegisterTypeIntoScriptingService(ScriptingService& scriptingService);
+		static void RegisterOperationsIntoScriptingService(ScriptingService& scriptingService);
 
 
 

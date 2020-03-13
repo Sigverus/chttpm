@@ -51,13 +51,17 @@ namespace chttpm
 
 
 
-	void BindResponse::RegisterIntoScriptingService(ScriptingService& scriptingService)
+	void BindResponse::RegisterTypeIntoScriptingService(ScriptingService& scriptingService)
+	{
+		int r = scriptingService.scriptEngine->RegisterObjectType("Response", 0, asOBJ_REF); assert(r >= 0);
+		BindReference::RegisterIntoScriptingService("Response", scriptingService);
+	}
+
+
+
+	void BindResponse::RegisterOperationsIntoScriptingService(ScriptingService& scriptingService)
 	{
 		int r;
-
-		// Register object.
-		r = scriptingService.scriptEngine->RegisterObjectType("Response", 0, asOBJ_REF); assert(r >= 0);
-
 
 		// Properties
 		r = scriptingService.scriptEngine->RegisterObjectMethod("Response", "int get_statusCode() const property", asMETHOD(BindResponse, GetStatusCode), asCALL_THISCALL); assert(r >= 0);
@@ -65,8 +69,5 @@ namespace chttpm
 
 		r = scriptingService.scriptEngine->RegisterObjectMethod("Response", "string get_body() const property", asMETHOD(BindResponse, GetBody), asCALL_THISCALL); assert(r >= 0);
 		r = scriptingService.scriptEngine->RegisterObjectMethod("Response", "void set_body(string) property", asMETHOD(BindResponse, SetBody), asCALL_THISCALL); assert(r >= 0);
-
-		// Helpers
-		BindReference::RegisterIntoScriptingService("Response", scriptingService);
 	}
 }

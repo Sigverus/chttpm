@@ -26,7 +26,8 @@ namespace chttpm
 		std::string GetBody() const;
 		void SetBody(std::string& body);
 
-		static void RegisterIntoScriptingService(ScriptingService& scriptingService);
+		static void RegisterTypeIntoScriptingService(ScriptingService& scriptingService);
+		static void RegisterOperationsIntoScriptingService(ScriptingService& scriptingService);
 
 
 

@@ -24,7 +24,8 @@ namespace chttpm
 		std::string GetTarget() const;
 		const BindQueryParameters* GetQueryParameters() const;
 
-		static void RegisterIntoScriptingService(ScriptingService& scriptingService);
+		static void RegisterTypeIntoScriptingService(ScriptingService& scriptingService);
+		static void RegisterOperationsIntoScriptingService(ScriptingService& scriptingService);
 
 
 

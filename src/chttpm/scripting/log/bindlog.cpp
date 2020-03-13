@@ -33,19 +33,21 @@ namespace chttpm
 
 
 
-	void BindMessageLoggerKeys::RegisterIntoScriptingService(ScriptingService& scriptingService)
+	void BindMessageLoggerKeys::RegisterTypeIntoScriptingService(ScriptingService& scriptingService)
+	{
+		int r = scriptingService.scriptEngine->RegisterObjectType("MessageLoggerKeys", 0, asOBJ_REF); assert(r >= 0);
+		BindReference::RegisterIntoScriptingService("MessageLoggerKeys", scriptingService);
+	}
+
+
+
+	void BindMessageLoggerKeys::RegisterOperationsIntoScriptingService(ScriptingService& scriptingService)
 	{
 		int r;
-
-		// Register object.
-		r = scriptingService.scriptEngine->RegisterObjectType("MessageLoggerKeys", 0, asOBJ_REF); assert(r >= 0);
 
 		// Methods
 		r = scriptingService.scriptEngine->RegisterObjectMethod("MessageLoggerKeys", "MessageLoggerKeys& Str(string, string)", asMETHOD(BindMessageLoggerKeys, Str), asCALL_THISCALL); assert(r >= 0);
 		r = scriptingService.scriptEngine->RegisterObjectMethod("MessageLoggerKeys", "void Msg(string) const", asMETHOD(BindMessageLoggerKeys, Msg), asCALL_THISCALL); assert(r >= 0);
-
-		// Helpers
-		BindReference::RegisterIntoScriptingService("MessageLoggerKeys", scriptingService);
 	}
 
 
@@ -72,23 +74,21 @@ namespace chttpm
 
 
 
-	void BindBuilderLoggerKeys::RegisterIntoScriptingService(ScriptingService& scriptingService)
+	void BindBuilderLoggerKeys::RegisterTypeIntoScriptingService(ScriptingService& scriptingService)
+	{
+		int r = scriptingService.scriptEngine->RegisterObjectType("BuilderLoggerKeys", 0, asOBJ_REF); assert(r >= 0);
+		BindReference::RegisterIntoScriptingService("BuilderLoggerKeys", scriptingService);
+	}
+
+
+
+	void BindBuilderLoggerKeys::RegisterOperationsIntoScriptingService(ScriptingService& scriptingService)
 	{
 		int r;
-
-		// Register logger type, it is needed to succeed here.
-		// TODO : separate types registering from their methods, due to cyclic return types
-		r = scriptingService.scriptEngine->RegisterObjectType("Logger", 0, asOBJ_REF); assert(r >= 0);
-
-		// Register object.
-		r = scriptingService.scriptEngine->RegisterObjectType("BuilderLoggerKeys", 0, asOBJ_REF); assert(r >= 0);
 
 		// Methods
 		r = scriptingService.scriptEngine->RegisterObjectMethod("BuilderLoggerKeys", "BuilderLoggerKeys& Str(string, string)", asMETHOD(BindBuilderLoggerKeys, Str), asCALL_THISCALL); assert(r >= 0);
 		r = scriptingService.scriptEngine->RegisterObjectMethod("BuilderLoggerKeys", "Logger@ Logger() const", asMETHOD(BindBuilderLoggerKeys, Logger), asCALL_THISCALL); assert(r >= 0);
-
-		// Helpers
-		BindReference::RegisterIntoScriptingService("BuilderLoggerKeys", scriptingService);
 	}
 
 
@@ -129,15 +129,17 @@ namespace chttpm
 
 
 
-	void BindLogger::RegisterIntoScriptingService(ScriptingService& scriptingService)
+	void BindLogger::RegisterTypeIntoScriptingService(ScriptingService& scriptingService)
 	{
-		// Helpers
+		int r = scriptingService.scriptEngine->RegisterObjectType("Logger", 0, asOBJ_REF); assert(r >= 0);
 		BindReference::RegisterIntoScriptingService("Logger", scriptingService);
+	}
 
+
+
+	void BindLogger::RegisterOperationsIntoScriptingService(ScriptingService& scriptingService)
+	{
 		int r;
-
-		// Register object.
-		//r = scriptingService.scriptEngine->RegisterObjectType("Logger", 0, asOBJ_REF); assert(r >= 0);
 
 		// Factory
 		r = scriptingService.scriptEngine->RegisterObjectBehaviour("Logger", asBEHAVE_FACTORY, "Logger@ f()", asFUNCTION(BindLoggerFactory), asCALL_CDECL); assert(r >= 0);
@@ -148,6 +150,5 @@ namespace chttpm
 
 		// Operators
 		r = scriptingService.scriptEngine->RegisterObjectMethod("Logger", "Logger& opAssign(const Logger&)", asMETHOD(BindLogger, OpAssign), asCALL_THISCALL);
-
 	}
 }

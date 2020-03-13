@@ -27,7 +27,8 @@ namespace chttpm
 
 		void Msg(std::string message) const;
 
-		static void RegisterIntoScriptingService(ScriptingService& scriptingService);
+		static void RegisterTypeIntoScriptingService(ScriptingService& scriptingService);
+		static void RegisterOperationsIntoScriptingService(ScriptingService& scriptingService);
 
 
 
@@ -48,7 +49,8 @@ namespace chttpm
 
 		BindLogger* Logger() const;
 
-		static void RegisterIntoScriptingService(ScriptingService& scriptingService);
+		static void RegisterTypeIntoScriptingService(ScriptingService& scriptingService);
+		static void RegisterOperationsIntoScriptingService(ScriptingService& scriptingService);
 
 
 
@@ -68,7 +70,8 @@ namespace chttpm
 
 		BindLogger& OpAssign(const BindLogger& other);
 
-		static void RegisterIntoScriptingService(ScriptingService& scriptingService);
+		static void RegisterTypeIntoScriptingService(ScriptingService& scriptingService);
+		static void RegisterOperationsIntoScriptingService(ScriptingService& scriptingService);
 
 
 

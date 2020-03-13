@@ -41,19 +41,21 @@ namespace chttpm
 
 
 
-	void BindRequest::RegisterIntoScriptingService(ScriptingService& scriptingService)
+	void BindRequest::RegisterTypeIntoScriptingService(ScriptingService& scriptingService)
+	{
+		int r = scriptingService.scriptEngine->RegisterObjectType("Request", 0, asOBJ_REF); assert(r >= 0);
+		BindReference::RegisterIntoScriptingService("Request", scriptingService);
+	}
+
+
+
+	void BindRequest::RegisterOperationsIntoScriptingService(ScriptingService& scriptingService)
 	{
 		int r;
-
-		// Register object.
-		r = scriptingService.scriptEngine->RegisterObjectType("Request", 0, asOBJ_REF); assert(r >= 0);
 
 		// Properties
 		r = scriptingService.scriptEngine->RegisterObjectMethod("Request", "string get_method() const property", asMETHOD(BindRequest, GetMethod), asCALL_THISCALL); assert(r >= 0);
 		r = scriptingService.scriptEngine->RegisterObjectMethod("Request", "string get_target() const property", asMETHOD(BindRequest, GetTarget), asCALL_THISCALL); assert(r >= 0);
 		r = scriptingService.scriptEngine->RegisterObjectMethod("Request", "const QueryParameters@ get_queryParameters() const property", asMETHOD(BindRequest, GetQueryParameters), asCALL_THISCALL); assert(r >= 0);
-
-		// Helpers
-		BindReference::RegisterIntoScriptingService("Request", scriptingService);
 	}
 }

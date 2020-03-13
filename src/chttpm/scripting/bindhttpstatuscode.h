@@ -10,6 +10,6 @@ namespace chttpm
 
 	namespace BindHttpStatusCode
 	{
-		void RegisterIntoScriptingService(ScriptingService& scriptingService);
+		void RegisterTypeIntoScriptingService(ScriptingService& scriptingService);
 	}
 }
