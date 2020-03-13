@@ -8,6 +8,7 @@
 
 namespace chttpm
 {
+	class BindQueryParameters;
 	struct Request;
 	class ScriptingService;
 
@@ -18,10 +19,10 @@ namespace chttpm
 	{
 	public:
 		explicit BindRequest(const Request& request);
-		~BindRequest();
 
 		std::string GetMethod() const;
 		std::string GetTarget() const;
+		const BindQueryParameters* GetQueryParameters() const;
 
 		static void RegisterIntoScriptingService(ScriptingService& scriptingService);
 

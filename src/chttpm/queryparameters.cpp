@@ -16,11 +16,11 @@ namespace chttpm
 
 	std::string QueryParameters::Get(const std::string key) const
 	{
-		auto findIt = std::find(std::begin(m_Keys), std::end(m_Keys), key);
-		if (findIt == std::end(m_Keys))
+		auto findIt = std::find(std::cbegin(m_Keys), std::cend(m_Keys), key);
+		if (findIt == std::cend(m_Keys))
 			return "";
 
-		auto index = std::distance(std::begin(m_Keys), findIt);
+		auto index = std::distance(std::cbegin(m_Keys), findIt);
 		return m_Values.at(index);
 	}
 

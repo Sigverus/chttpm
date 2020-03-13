@@ -22,7 +22,6 @@ namespace chttpm
 	{
 	public:
 		explicit BindMessageLoggerKeys(MessageLoggerKeys messageLoggerKeys);
-		BindMessageLoggerKeys(const BindMessageLoggerKeys&);
 
 		BindMessageLoggerKeys& Str(std::string key, std::string value);
 

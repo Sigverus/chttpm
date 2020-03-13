@@ -88,5 +88,21 @@ namespace LogTests
 			scriptingService.ProcessRequest("module", request, response);
 			AssertEqual("resource", response.body, "after script call");
 		}
+
+		SECTION("Get query parameters")
+		{
+			request.queryParameters.Add("test_param_key", "test_param_value");
+
+			scriptingService.LoadModuleFromMemory(
+				"module",
+				"void ProcessRequest(const Request& request, Response& response) {"
+				"    response.body = request.queryParameters[\"test_param_key\"];"
+				"}"
+			);
+
+			AssertNotEqual("test_param_value", response.body, "before script call");
+			scriptingService.ProcessRequest("module", request, response);
+			AssertEqual("test_param_value", response.body, "after script call");
+		}
 	}
 }

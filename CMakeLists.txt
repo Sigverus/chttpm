@@ -118,6 +118,8 @@ set(CHTTPM_SOURCE
 
 	src/chttpm/scripting/bindhttpstatuscode.cpp
 	src/chttpm/scripting/bindhttpstatuscode.h
+	src/chttpm/scripting/bindqueryparameters.cpp
+	src/chttpm/scripting/bindqueryparameters.h
 	src/chttpm/scripting/bindrequest.cpp
 	src/chttpm/scripting/bindrequest.h
 	src/chttpm/scripting/bindresponse.cpp
@@ -143,6 +145,7 @@ set(CHTTPMTESTS_SOURCE
 
 	src/chttpmtests/log/logtests.cpp
 
+	src/chttpmtests/scripting/bindqueryparameterstests.cpp
 	src/chttpmtests/scripting/bindrequesttests.cpp
 	src/chttpmtests/scripting/bindresponsetests.cpp
 

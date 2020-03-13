@@ -3,6 +3,7 @@
 #include"scriptingservice.h"
 
 #include"bindhttpstatuscode.h"
+#include"bindqueryparameters.h"
 #include"bindrequest.h"
 #include"bindresponse.h"
 #include"log/bindlog.h"
@@ -16,6 +17,7 @@ namespace chttpm
 		void BindAll(ScriptingService& scriptingService)
 		{
 			BindHttpStatusCode::RegisterIntoScriptingService(scriptingService);
+			BindQueryParameters::RegisterIntoScriptingService(scriptingService);
 			BindRequest::RegisterIntoScriptingService(scriptingService);
 			BindResponse::RegisterIntoScriptingService(scriptingService);
 			BindMessageLoggerKeys::RegisterIntoScriptingService(scriptingService);
