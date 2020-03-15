@@ -14,7 +14,7 @@ namespace chttpm
 
 
 
-	std::string QueryParameters::Get(const std::string key) const
+	std::string QueryParameters::GetValue(const std::string key) const
 	{
 		auto findIt = std::find(std::cbegin(m_Keys), std::cend(m_Keys), key);
 		if (findIt == std::cend(m_Keys))
@@ -26,7 +26,7 @@ namespace chttpm
 
 
 
-	std::string QueryParameters::Get(int index) const
+	std::string QueryParameters::GetValue(int index) const
 	{
 		if (index < 0 || index >= int(m_Values.size()))
 			return "";

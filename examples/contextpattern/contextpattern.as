@@ -6,11 +6,11 @@ class RequestContext {
 	Logger@ logger;
 
 	// AngelScript classes allows constructors. Others, such as copy constructor,
-	// are alse possible. The ':' initializer for members is not available.
+	// are also possible. The ':' initializer for members is not available.
 	// Reference parameters can be of style 'in', 'out' and 'inout'. When not specified,
 	// 'inout' is assumed.
 	RequestContext(Logger& logger) {
-		// Operations on handles are prepended by @. Note that this is accesed
+		// Operations on handles are prepended by @. Note that this is accessed
 		// by '.' operator. Without @, the operation are on the type.
 		@this.logger = logger;
 	}

@@ -14,10 +14,10 @@ namespace chttpm
 		void Add(const std::string key, const std::string value);
 
 		// Returns the first value for @key found. Empty if not found.
-		std::string Get(const std::string key) const;
+		std::string GetValue(const std::string key) const;
 
 		// Returns the value for @index. Empty if out of bounds.
-		std::string Get(int index) const;
+		std::string GetValue(int index) const;
 
 		// Returns the number of registered parameters. Repeats included
 		int size() const;

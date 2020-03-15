@@ -35,7 +35,9 @@ namespace chttpm
 
 	const BindQueryParameters* BindRequest::GetQueryParameters() const
 	{
-		// TODO : since query parameters are sure to exist in m_Request, it is possible to avoid new allocations.
+		// TODO : I don't want to instantiate a new BindQueryParameters every call, but
+		// I'm finding it hard to find a solution that balances well flexibility with safety.
+		// Not wanting to let Angel Script intrude within the types makes this harder, though.
 		return new BindQueryParameters{ m_Request.queryParameters };
 	}
 

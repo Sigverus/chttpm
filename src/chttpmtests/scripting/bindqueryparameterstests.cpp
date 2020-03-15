@@ -33,8 +33,8 @@ namespace LogTests
 			scriptingService.LoadModuleFromMemory(
 				"module",
 				"void ProcessRequest(const Request& request, Response& response) {"
-				"    response.body = request.queryParameters.Get(\"param\") + \"\\n\";"
-				"    response.body += request.queryParameters.Get(0) + \"\\n\";"
+				"    response.body = request.queryParameters.GetValue(\"param\") + \"\\n\";"
+				"    response.body += request.queryParameters.GetValue(0) + \"\\n\";"
 				"    response.body += request.queryParameters[\"param\"] + \"\\n\";"
 				// TODO : methods for casting from integer to string
 				// "    response.body += request.queryParameters.size();"
@@ -64,8 +64,8 @@ namespace LogTests
 			scriptingService.LoadModuleFromMemory(
 				"module",
 				"void ProcessRequest(const Request& request, Response& response) {"
-				"    response.body = request.queryParameters.Get(\"fried\") + \"\\n\";"
-				"    response.body += request.queryParameters.Get(1) + \"\\n\";"
+				"    response.body = request.queryParameters.GetValue(\"fried\") + \"\\n\";"
+				"    response.body += request.queryParameters.GetValue(1) + \"\\n\";"
 				"    response.body += request.queryParameters[\"prime\"] + \"\\n\";"
 				// TODO : methods for casting from integer to string
 				// "    response.body += request.queryParameters.size();"

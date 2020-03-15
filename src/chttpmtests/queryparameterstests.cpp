@@ -11,44 +11,44 @@ namespace LogTests
 
 
 
-	TEST_CASE("QueryParameters::Get(const std::string) failures", "[QueryParameters]")
+	TEST_CASE("QueryParameters::GetValue(const std::string) failures", "[QueryParameters]")
 	{
 		QueryParameters queryParameters{};
 
 		SECTION("Not registered key on empty parameters returns empty string")
 		{
-			AssertEqual("", queryParameters.Get("someKey"), "registered key");
+			AssertEqual("", queryParameters.GetValue("someKey"), "registered key");
 		}
 
 		SECTION("Not registered key on not empty parameters returns empty string")
 		{
 			queryParameters.Add("someKey", "someValue");
-			AssertEqual("", queryParameters.Get("otherKey"), "registered key");
+			AssertEqual("", queryParameters.GetValue("otherKey"), "registered key");
 		}
 	}
 
 
 
-	TEST_CASE("QueryParameters::Get(int) failures", "[QueryParameters]")
+	TEST_CASE("QueryParameters::GetValue(int) failures", "[QueryParameters]")
 	{
 		QueryParameters queryParameters{};
 
 		SECTION("Not registered index on empty parameters returns empty string")
 		{
-			AssertEqual("", queryParameters.Get(0), "0 index on empty parameters");
-			AssertEqual("", queryParameters.Get(1), "some index on empty parameters");
+			AssertEqual("", queryParameters.GetValue(0), "0 index on empty parameters");
+			AssertEqual("", queryParameters.GetValue(1), "some index on empty parameters");
 		}
 
 		queryParameters.Add("someKey", "someValue");
 
 		SECTION("Not registered index on not empty parameters returns empty string")
 		{
-			AssertEqual("", queryParameters.Get(1), "some index on empty parameters");
+			AssertEqual("", queryParameters.GetValue(1), "some index on empty parameters");
 		}
 
 		SECTION("Negative index returns empty string")
 		{
-			AssertEqual("", queryParameters.Get(-1), "negative index");
+			AssertEqual("", queryParameters.GetValue(-1), "negative index");
 		}
 	}
 
@@ -71,15 +71,15 @@ namespace LogTests
 
 		queryParameters.Add("someKey", "someValue");
 		AssertEqual(1, queryParameters.size(), "size after inserting someKey");
-		AssertEqual("someValue", queryParameters.Get("someKey"), "fetching someKey by string");
-		AssertEqual("someValue", queryParameters.Get(0), "fetching someKey by index");
+		AssertEqual("someValue", queryParameters.GetValue("someKey"), "fetching someKey by string");
+		AssertEqual("someValue", queryParameters.GetValue(0), "fetching someKey by index");
 
 		queryParameters.Add("otherKey", "otherValue");
 		AssertEqual(2, queryParameters.size(), "size after inserting otherKey");
-		AssertEqual("otherValue", queryParameters.Get("otherKey"), "fetching otherKey by string");
-		AssertEqual("otherValue", queryParameters.Get(1), "fetching otherKey by index");
+		AssertEqual("otherValue", queryParameters.GetValue("otherKey"), "fetching otherKey by string");
+		AssertEqual("otherValue", queryParameters.GetValue(1), "fetching otherKey by index");
 
-		// Repeated keys is undefined behavior on Get.
+		// Repeated keys is undefined behavior on GetValue.
 		queryParameters.Add("otherKey", "missingno");
 		AssertEqual(3, queryParameters.size(), "size after inserting otherKey");
 	}
