@@ -119,13 +119,23 @@ The currently exposed types are as defined by their source files:
 
 There is a `void print(std::string)` function exported, but it will eventually be substituted by a logging entity.
 
+# Features Checklist
+
+These are the available or intended features of chttpm:
+
+- [x] Read request target
+- [x] Read request method
+- [x] Read request query parameters
+- [ ] Read request headers
+- [ ] Read request body
+- [ ] Write response headers
+- [ ] Write response body
+- [x] Simple pseudo-json logger
+- [ ] Scripts hot reloading
+
 # Compiling
 
 TODO : write this
-
-# Why no automated tests (yet)
-
-Most of the source code involves either Cpp HTTPLib or Angel Script. I'm trying to figure out how to best write automated tests that work with them. Some refactors may be needed when I get it.
 
 # License
 
