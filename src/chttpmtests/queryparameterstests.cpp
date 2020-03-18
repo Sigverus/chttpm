@@ -5,7 +5,7 @@
 
 
 
-namespace LogTests
+namespace QueryParametersTests
 {
 	using namespace chttpm;
 

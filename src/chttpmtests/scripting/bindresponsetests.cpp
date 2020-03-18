@@ -11,7 +11,7 @@
 
 
 
-namespace LogTests
+namespace BindResponseTests
 {
 	using namespace chttpm;
 

@@ -10,7 +10,7 @@
 
 
 
-namespace LogTests
+namespace BindLogTests
 {
 	using namespace chttpm;
 

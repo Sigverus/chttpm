@@ -12,7 +12,7 @@
 
 
 
-namespace LogTests
+namespace BindQueryParametersTests
 {
 	using namespace chttpm;
 
